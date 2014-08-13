@@ -1,0 +1,106 @@
+<div>
+    <form class="form">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon"><label>Variables:</label></span>
+                    <input type="number" class="form-control" min=1 ng-model="variables">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-addon"><label>Restrictions:</label></span>
+                    <input type="number" class="form-control" min=1 ng-model="restrictions">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-default" ng-click="updateTableu()">Start</button>
+            </div>
+        </div>
+    </form>
+    <div>
+        <div class="container">
+            <h2>Objective</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="input-group">
+                    <select class="form-control">
+                        <option value="max" selected>Max</option>
+                        <option value="min">Min</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-2" ng-repeat="coef in objectiveCoefs">
+                <div class="input-group" >
+                    <input type="number" class="form-control" ng-model="coef.value">
+                    <span class="input-group-addon">{{coef.name}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Restrictions</h2>
+        </div>
+        <div class="container">
+            <table class="table">
+                <tr >
+                    <th ng-repeat="header in columnHeaders" class="text-center">
+                        {{header}}
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Rhs
+                    </th>
+                </tr>
+                <tr ng-repeat="rest in rests">
+                    <td ng-repeat="coef in rest.coefs">
+                        <input type="number" class="form-control" ng-model="coef.value">
+                    </td>
+                    <td>
+                        <select ng-model="rest.type">
+                            <option selected value="LowerEqual">&le;</option>
+                            <option value="Equal">=</option>
+                            <option value="GreaterEqual">&ge;</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" ng-model="rest.rhs">
+                    </td>
+                </tr>
+            </table>
+            <button type="submit" class="btn btn-default" ng-click="go()">Go!</button>
+        </div>
+    </div>
+ <div ng-controller="tableuCtrl">
+    <h2>Model matrix</h2>
+    <table class="table">
+    <tr>
+        <th>Basic</th>
+        <th ng-repeat="basic in basicVars">{{basic}}</th>
+        <th ng-repeat="shadow in shadowVars">{{shadow.name}}</th>
+        <th>Rhs</th>
+    </tr>
+    <tr>
+        <td>Z</td>
+        <td ng-repeat="coef in objectiveCoefs">
+            {{coef.value}}
+        </td>
+        <td ng-repeat="s in shadowVars">
+            0
+        </td>
+    </tr>
+    <tr>
+        <td>S1</td>
+    </tr>
+    <tr>
+        <td>S2</td>
+    </tr>
+    <tr>
+        <td>S3</td>
+    </tr>
+    </table>            
+</div>
+
