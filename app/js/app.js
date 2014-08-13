@@ -5,7 +5,7 @@ angular.module('Simplex', ['ngRoute'])
     .config(['$routeProvider', '$locationProvider',
             function($routeProvider, $locationProvider){
                 $routeProvider
-                .when('/', {
+                .when('/simplex', {
                     templateUrl: '/simplex/app/partials/landing.html',
                     controller: IndexCtrl
                 })
