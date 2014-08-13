@@ -6,11 +6,11 @@ angular.module('Simplex', ['ngRoute'])
             function($routeProvider, $locationProvider){
                 $routeProvider
                 .when('/', {
-                    templateUrl: '/app/partials/landing.html',
+                    templateUrl: '/simplex/app/partials/landing.html',
                     controller: IndexCtrl
                 })
                 .otherwise({
-                    redirectTo: '/'
+                    redirectTo: '/simplex'
                 });
 
                 $locationProvider.html5Mode(true);
