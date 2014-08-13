@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('Simplex', [])
+angular.module('Simplex', ['ngRoute'])
     .config(['$routeProvider', '$locationProvider',
             function($routeProvider, $locationProvider){
                 $routeProvider

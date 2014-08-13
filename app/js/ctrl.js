@@ -3,6 +3,7 @@
 function IndexCtrl($scope){
     $scope.total_vars = 2;
     $scope.total_rests = 2;
+    $scope.problem_type = 'max';
 
     $scope.setup = function(){
         var obj_coefs = [];
@@ -18,17 +19,26 @@ function IndexCtrl($scope){
                 rhs: 0,
                 type: "leq", 
                 name: "R" + i.toString(), 
-                coefs: []
+                obj_coefs: [],
+                shadow_coefs: []
             };
 
             for (var j=1; j <= $scope.total_vars; j++){
-                rest.coefs.push({value: 0.0, name: "X" + j.toString()})        
+                rest.obj_coefs.push({value: 0.0, name: "X" + j.toString()});       
             }
 
+            for (var j=1; j <= $scope.total_rests; j++){
+                rest.shadow_coefs.push({value: 0.0, name: "S" + j.toString()});
+            }
+
+            rest.shadow_coefs[i - 1]['value'] = 1.0;
             obj_rests.push(rest);
         }
 
         $scope.obj_rests = obj_rests;
+
     };
+
+    
 }
 
